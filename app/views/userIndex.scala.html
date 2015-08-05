@@ -3,18 +3,32 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <title>@title</title>
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-    <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
-    <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
     </head>
     <body>
-        <form action="/signup" method="get">
-            name:<input type="text" name="name"><br>
-            email:<input type="text" name="age"><br>
-            password:<input type="text" name="age"><br>
-            <input type="submit" value="送信">
+        <div class="error">@title</div>
+        <form action="/signup" method="post">
+        <table>
+            <tr>
+                <td>name:</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>email:</td>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td>password:</td>
+                <td><input type="text" name="password"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="送信"></td>
+            </tr>
+        </table>
         </form>
     </body>
 </html>

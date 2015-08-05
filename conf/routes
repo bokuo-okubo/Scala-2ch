@@ -10,12 +10,10 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 
 ## create user
-GET     /signup                     controllers.UsersController.index
+GET      /signup                     controllers.UsersController.showCreatePage
+POST     /signup                     controllers.UsersController.create
 
 
 ## login API
 GET     /login                      controllers.SessionsController.index
 POST    /login                      controllers.SessionsController.create
-
-
-
