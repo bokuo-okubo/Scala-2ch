@@ -10,6 +10,9 @@ import play.db._
 
 import models.{UserHandle, User}
 
+import scala.concurrent.Await
+import scala.concurrent.duration.Duration
+
 /**
  * Created by bko on 8/5/15.
  */
@@ -17,13 +20,13 @@ import models.{UserHandle, User}
 
 class UsersController extends Controller {
 
-  var userDataForm: Form[User] = Form (
+  val userDataForm: Form[User] = Form (
     mapping(
-      "ID"         -> number,
+      "id"         -> optional(longNumber),
       "name"       -> nonEmptyText(maxLength = 10),
       "email"      -> text, // TODO : validate
-      "password"   -> nonEmptyText(maxLength = 10), // TODO : digest
-      "created_at" -> jodaDate
+      "password"   -> nonEmptyText(maxLength = 10),// TODO : digest
+      "created_at" -> optional(jodaDate)
     )(User.apply)(User.unapply)
   )
 
@@ -33,10 +36,16 @@ class UsersController extends Controller {
 
   def create = Action { implicit request =>
     userDataForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.userIndex(errors.toString)),
-      user => {
+      errors => {
+        UserHandle.show_schema
+        BadRequest(views.html.userIndex(errors.toString))
+      },
+      form => {
+        val user = User(None, form.name, form.password, form.email, None)
+        UserHandle.show_schema
+        println( UserHandle.findByName(form.name) )
         UserHandle.create(user)
-        Ok(views.html.userIndex(" SUCCESS!!! "))
+        Ok(views.html.userIndex(" SUCCESS!!! ")).withSession( "login" -> "yes" )
       }
     )
   }

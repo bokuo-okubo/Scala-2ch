@@ -22,8 +22,13 @@ libraryDependencies ++= List(
   // to use datetime for slick.
   "joda-time" % "joda-time" % "2.7",
   "org.joda" % "joda-convert" % "1.7",
-  "com.github.tototoshi" %% "slick-joda-mapper" % "2.0.0"
+  "com.github.tototoshi" %% "slick-joda-mapper" % "2.0.0",
 
+  "org.scalikejdbc" %% "scalikejdbc"        % "2.2.7",
+  "org.scalikejdbc" %% "scalikejdbc-test"   % "2.2.7"   % "test",
+  "org.scalikejdbc" %% "scalikejdbc-config"  % "2.2.7",
+  "com.h2database"  %  "h2"                 % "1.4.187",
+  "ch.qos.logback"  %  "logback-classic"    % "1.1.3"
 )
 
 fork in run := true

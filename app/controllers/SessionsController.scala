@@ -9,10 +9,18 @@ import play.api._
 class SessionsController extends Controller {
 
   def index = Action {
-    Ok(<p>sessons controller index</p>)
+    Ok(views.html.loginIndex("user login"))
   }
 
-  def create = Action {
-    Ok(<p>sessons controller index</p>)
+  def showCreatePage = Action{
+    Ok(views.html.userIndex("user sing up"))
+  }
+
+  def create = Action { request =>
+    request.session.get("login").map{ login =>
+      Ok(<p>sessons controller index login: {login}</p>)
+    }.getOrElse{
+      Ok(<p>not connected</p>)
+    }
   }
 }
